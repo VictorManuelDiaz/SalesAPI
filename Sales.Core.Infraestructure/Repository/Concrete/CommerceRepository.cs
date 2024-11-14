@@ -21,16 +21,9 @@ namespace Sales.Core.Infraestructure.Repository.Concrete
             commerce.created_at = DateTime.UtcNow;
             commerce.updated_at = DateTime.UtcNow;
 
-            var userState = db.States.Local.FirstOrDefault(s => s.state_id == commerce.User.state_id);
-            if (userState == null)
-            {
-                userState = db.States.Find(commerce.User.state_id);
-                if (userState != null)
-                {
-                    db.Entry(userState).State = EntityState.Unchanged;
-                }
-            }
-            commerce.User.State = userState;
+            var user = commerce.User;
+            user.user_id = Guid.NewGuid();
+            commerce.User = user;
 
             db.Commerces.Add(commerce);
             return commerce;
