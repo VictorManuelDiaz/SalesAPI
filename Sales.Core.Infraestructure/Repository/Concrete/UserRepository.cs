@@ -61,10 +61,9 @@ namespace Sales.Core.Infraestructure.Repository.Concrete
                 //Verifica que el usuario existe
             {
                 selectedUser.name = user.name;
-                selectedUser.last_name = user.last_name;
-                selectedUser.email = user.email;
                 selectedUser.password = user.password;
-                selectedUser.is_active = user.is_active;
+                selectedUser.role = user.role;
+                selectedUser.state_id = user.state_id;
                 selectedUser.updated_at = DateTime.Now;
                 //Modifica los datos del usuario con los valores del parámetro
 

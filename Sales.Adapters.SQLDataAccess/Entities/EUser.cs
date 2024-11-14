@@ -19,7 +19,7 @@ namespace Sales.Adapters.SQLDataAccess.Entities
             builder.HasOne(u => u.Commerce)
                 .WithMany()
                    .HasForeignKey(u => u.commerce_id)
-                   .OnDelete(DeleteBehavior.Cascade); ;
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(u => u.State);
         }

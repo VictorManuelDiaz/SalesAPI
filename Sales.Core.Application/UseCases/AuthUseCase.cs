@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using Sales.Core.Application.Interfaces;
 using Sales.Core.Domain.Models;
 using Sales.Core.Infraestructure.Repository.Abstract;
-
-using Newtonsoft.Json;
 
 namespace Sales.Core.Application.UseCases
 {
