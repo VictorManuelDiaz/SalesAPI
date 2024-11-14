@@ -21,6 +21,10 @@ namespace Sales.Adapters.SQLDataAccess.Entities
             builder.HasOne(s => s.Commerce);
 
             builder.HasOne(s => s.State);
+
+            builder
+                .HasMany(s => s.SaleDetails)
+                .WithOne(sd => sd.Sale);
         }
     }
 }

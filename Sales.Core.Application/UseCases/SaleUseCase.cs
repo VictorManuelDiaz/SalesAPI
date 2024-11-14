@@ -4,16 +4,16 @@ using Sales.Core.Infraestructure.Repository.Concrete;
 
 namespace Sales.Core.Application.UseCases
 {
-    public class CommerceUseCase
+    public class SaleUseCase
     {
-        private readonly CommerceRepository repository;
+        private readonly SaleRepository repository;
 
-        public CommerceUseCase(CommerceRepository repository)
+        public SaleUseCase(SaleRepository repository)
         {
             this.repository = repository;
         }
 
-        public Commerce Create(Commerce entity)
+        public Sale Create(Sale entity)
         {
             if (entity != null)
             {
@@ -22,13 +22,7 @@ namespace Sales.Core.Application.UseCases
                 return result;
             }
             else
-                throw new Exception("Error. The commerce cannot be null");
-        }
-
-        public void Delete(Guid entityId)
-        {
-            repository.Delete(entityId);
-            repository.saveAllChanges();
+                throw new Exception("Error. The sale cannot be null");
         }
     }
 }

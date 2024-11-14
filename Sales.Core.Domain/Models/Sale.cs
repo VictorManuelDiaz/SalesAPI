@@ -22,5 +22,6 @@ namespace Sales.Core.Domain.Models
         public Commerce Commerce { get; set; }
         [ForeignKey("state_id")]
         public State State { get; set; }
+        public List<SaleDetail> SaleDetails { get; set; }
     }
 }

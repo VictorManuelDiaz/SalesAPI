@@ -26,7 +26,7 @@ namespace Sales.Ports.API.Controllers
 
         [HttpPost]
         [Route("create")]
-        public ActionResult<Commerce> Post([FromBody] Commerce commerce)
+        public ActionResult<Sale> Post([FromBody] Commerce commerce)
         {
             CommerceUseCase service = CreateService();
 

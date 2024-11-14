@@ -14,7 +14,7 @@ namespace Sales.Adapters.SQLDataAccess.Entities
         {
             builder.ToTable("tb_sale_detail");
 
-            builder.HasKey(c => c.deatil_id);
+            builder.HasKey(sd => sd.deatil_id);
 
         }
     }
