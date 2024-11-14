@@ -7,9 +7,11 @@ using Sales.Core.Infraestructure.Repository.Concrete;
 using Sales.Core.Domain.Models;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sales.Ports.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -18,11 +20,8 @@ namespace Sales.Ports.API.Controllers
         public UserUseCase CreateService()
         {
             SalesDB db = new SalesDB();
-            //Instanciando el contexto
             UserRepository repository = new UserRepository(db);
-            //Llamando al repositorio concreto y mandando como argumento el contexto
             UserUseCase service = new UserUseCase(repository);
-            //Definiendo el servicio y pasando como parámetro el repositorio
 
             return service;
         }
@@ -72,6 +71,23 @@ namespace Sales.Ports.API.Controllers
             UserUseCase service = CreateService();
             service.Delete(id);
             return Ok("Eliminado exitosamente");
+        }
+
+        [HttpGet]
+        [Route("getByCommerce/{commerceId}")]
+        public ActionResult<IEnumerable<User>> GetByCommerce(Guid commerceId)
+        {
+            UserUseCase service = CreateService();
+
+            try
+            {
+                var users = service.GetByCommerce(commerceId);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error: {ex.Message}");
+            }
         }
     }
 }

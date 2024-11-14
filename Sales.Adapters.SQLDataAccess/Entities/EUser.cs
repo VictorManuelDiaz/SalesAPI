@@ -13,6 +13,9 @@ namespace Sales.Adapters.SQLDataAccess.Entities
             builder.HasKey(u => u.user_id);
 
             builder.HasOne(u => u.State);
+
+            builder.HasOne(u => u.Commerce)
+                .WithMany(c => c.Users);
         }
     }
 }

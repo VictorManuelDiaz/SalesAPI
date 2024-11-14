@@ -36,15 +36,6 @@ namespace Sales.Ports.API.Controllers
             return service;
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        public object Get()
-        {
-            var responseObject = new { Status = "Running" };
-            logger.LogInformation($"Status: {responseObject.Status}");
-
-            return responseObject;
-        }
 
         [AllowAnonymous]
         [HttpPost("login")]

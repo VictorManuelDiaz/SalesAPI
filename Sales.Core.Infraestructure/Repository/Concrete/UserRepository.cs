@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 using Sales.Core.Domain.Models;
 using Sales.Core.Infraestructure.Repository.Abstract;
 using Sales.Adapters.SQLDataAccess.Contexts;
 using System.Linq;
+using Sales.Core.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sales.Core.Infraestructure.Repository.Concrete
 {
@@ -20,6 +21,7 @@ namespace Sales.Core.Infraestructure.Repository.Concrete
         {
             user.user_id = Guid.NewGuid();
             //Define nuevo identificador único
+            user.role = RoleType.Employee;
             db.Users.Add(user);
             return user;
         }
@@ -72,6 +74,15 @@ namespace Sales.Core.Infraestructure.Repository.Concrete
                 //Enmarcar el estado del usuario como modificado
             }
             return selectedUser;
+        }
+
+        public List<User> GetByCommerce(Guid commerceId)
+        {
+            var usersByCommerce = db.Users
+                                    .Where(u => u.commerce_id == commerceId)
+                                    .Include(s => s.State)
+                                    .ToList();
+            return usersByCommerce;
         }
     }
 }

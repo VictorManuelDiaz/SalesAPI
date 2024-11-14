@@ -7,11 +7,13 @@ using Sales.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
 using Sales.Core.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Sales.Ports.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SaleController : ControllerBase

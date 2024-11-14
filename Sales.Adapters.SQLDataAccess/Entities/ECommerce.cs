@@ -14,10 +14,8 @@ namespace Sales.Adapters.SQLDataAccess.Entities
 
             builder.HasOne(c => c.State);
 
-            builder.HasOne(c => c.User)
-                .WithMany()
-                   .HasForeignKey(u => u.user_id)
-                   .OnDelete(DeleteBehavior.Cascade); ;
+            builder.HasMany(c => c.Users)
+                .WithOne(u => u.Commerce);
         }
     }
 }

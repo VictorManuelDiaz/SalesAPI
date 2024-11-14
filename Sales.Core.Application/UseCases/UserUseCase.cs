@@ -5,16 +5,16 @@ using System.Text;
 using Sales.Core.Domain.Models;
 using Sales.Core.Application.Interfaces;
 
-using Sales.Core.Infraestructure.Repository.Abstract;
+using Sales.Core.Infraestructure.Repository.Concrete;
 
 namespace Sales.Core.Application.UseCases
 {
     public class UserUseCase : IBaseUseCase<User, Guid>
     {
 
-        private readonly IBaseRepository<User, Guid> repository;
+        private readonly UserRepository repository;
 
-        public UserUseCase(IBaseRepository<User, Guid> repository)
+        public UserUseCase(UserRepository repository)
         {
             this.repository = repository;
         }
@@ -54,6 +54,19 @@ namespace Sales.Core.Application.UseCases
             repository.Update(entity);
             repository.saveAllChanges();
             return entity;
+        }
+
+        public List<User> GetByCommerce(Guid commerceId)
+        {
+            if (commerceId == Guid.Empty)
+                throw new ArgumentException("Commerce ID cannot be empty.");
+
+            var users = repository.GetByCommerce(commerceId);
+
+            if (users == null || users.Count == 0)
+                throw new Exception("No users found for the given commerce.");
+
+            return users;
         }
     }
 }

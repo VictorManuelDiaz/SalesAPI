@@ -5,11 +5,13 @@ using Sales.Core.Application.UseCases;
 using Sales.Core.Infraestructure.Repository.Concrete;
 using Sales.Core.Domain.Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Sales.Ports.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CommerceController : ControllerBase

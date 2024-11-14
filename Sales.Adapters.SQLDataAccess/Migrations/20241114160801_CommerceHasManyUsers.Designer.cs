@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Sales.Adapters.SQLDataAccess.Contexts;
@@ -11,9 +12,11 @@ using Sales.Adapters.SQLDataAccess.Contexts;
 namespace Sales.Adapters.SQLDataAccess.Migrations
 {
     [DbContext(typeof(SalesDB))]
-    partial class SalesDBModelSnapshot : ModelSnapshot
+    [Migration("20241114160801_CommerceHasManyUsers")]
+    partial class CommerceHasManyUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

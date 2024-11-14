@@ -23,11 +23,7 @@ namespace Sales.Core.Application.UseCases
                 return null;
             }
             var token = repository.GetToken(user, key);
-            string result = JsonConvert.SerializeObject(new
-            {
-                token,
-                user = currentUser
-            });
+            string result = JsonConvert.SerializeObject(new { token });
             return result;
         }
     }
