@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sales.Core.Domain.Enums
 {
-    public enum StateType
+    public enum RoleType
     {
-        Active = 1,
-        Inactive = 2,
-        Pending = 3,
-        Completed = 4,
-        Canceled = 5
+        Owner = 1,
+        Employee = 2
     }
 }

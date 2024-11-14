@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +25,8 @@ namespace Sales.Ports.API.Controllers
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.configuration = configuration;
         }
+
+        [NonAction]
         public AuthUseCase CreateService()
         {
             SalesDB db = new SalesDB();

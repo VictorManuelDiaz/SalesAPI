@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sales.Core.Domain.Models;
 
@@ -17,6 +13,11 @@ namespace Sales.Adapters.SQLDataAccess.Entities
             builder.HasKey(c => c.commerce_id);
 
             builder.HasOne(c => c.State);
+
+            builder.HasOne(c => c.User)
+                .WithMany()
+                   .HasForeignKey(u => u.user_id)
+                   .OnDelete(DeleteBehavior.Cascade); ;
         }
     }
 }

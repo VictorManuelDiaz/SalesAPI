@@ -3,6 +3,7 @@
 using Sales.Core.Domain.Models;
 using Sales.Adapters.SQLDataAccess.Contexts;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sales.Core.Infraestructure.Repository.Concrete
 {
@@ -17,8 +18,20 @@ namespace Sales.Core.Infraestructure.Repository.Concrete
         public Commerce Create(Commerce commerce)
         {
             commerce.commerce_id = Guid.NewGuid();
-            commerce.created_at = DateTime.Now;
-            commerce.updated_at = DateTime.Now;
+            commerce.created_at = DateTime.UtcNow;
+            commerce.updated_at = DateTime.UtcNow;
+
+            var userState = db.States.Local.FirstOrDefault(s => s.state_id == commerce.User.state_id);
+            if (userState == null)
+            {
+                userState = db.States.Find(commerce.User.state_id);
+                if (userState != null)
+                {
+                    db.Entry(userState).State = EntityState.Unchanged;
+                }
+            }
+            commerce.User.State = userState;
+
             db.Commerces.Add(commerce);
             return commerce;
         }

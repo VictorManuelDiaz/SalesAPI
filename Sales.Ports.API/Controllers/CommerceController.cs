@@ -3,12 +3,8 @@
 using Sales.Adapters.SQLDataAccess.Contexts;
 using Sales.Core.Application.UseCases;
 using Sales.Core.Infraestructure.Repository.Concrete;
-
 using Sales.Core.Domain.Models;
-using System.Collections.Generic;
 using System;
-
-using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,6 +14,7 @@ namespace Sales.Ports.API.Controllers
     [ApiController]
     public class CommerceController : ControllerBase
     {
+        [NonAction]
         public CommerceUseCase CreateService()
         {
             SalesDB db = new SalesDB();
@@ -27,8 +24,8 @@ namespace Sales.Ports.API.Controllers
             return service;
         }
 
-        // POST api/<CommerceController>
         [HttpPost]
+        [Route("create")]
         public ActionResult<Commerce> Post([FromBody] Commerce commerce)
         {
             CommerceUseCase service = CreateService();
@@ -38,8 +35,8 @@ namespace Sales.Ports.API.Controllers
             return Ok(result);
         }
 
-        // DELETE api/<CommerceController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("delete")]
         public ActionResult Delete(Guid id)
         {
             CommerceUseCase service = CreateService();

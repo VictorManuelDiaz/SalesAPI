@@ -14,6 +14,7 @@ namespace Sales.Ports.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        [NonAction]
         public UserUseCase CreateService()
         {
             SalesDB db = new SalesDB();
@@ -26,16 +27,16 @@ namespace Sales.Ports.API.Controllers
             return service;
         }
 
-        // GET: api/<UserController>
         [HttpGet]
+        [Route("get_all")]
         public ActionResult<IEnumerable<User>> Get()
         {
             UserUseCase service = CreateService();
             return Ok(service.GetAll());
         }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("get_by_id/{id}")]
         public ActionResult<User> Get(Guid id)
         {
             UserUseCase service = CreateService();
@@ -43,8 +44,8 @@ namespace Sales.Ports.API.Controllers
             return Ok(service.GetById(id));
         }
 
-        // POST api/<UserController>
         [HttpPost]
+        [Route("create")]
         public ActionResult<User> Post([FromBody] User user)
         {
             UserUseCase service = CreateService();
@@ -54,19 +55,18 @@ namespace Sales.Ports.API.Controllers
             return Ok(result);
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public ActionResult Put(Guid id, [FromBody] User user)
+        [HttpPut]
+        [Route("update")]
+        public ActionResult Put([FromBody] User user)
         {
             UserUseCase service = CreateService();
-            user.user_id = id;
             service.Update(user);
 
             return Ok("Editado exitosamente");
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("delete/{id}")]
         public ActionResult Delete(Guid id)
         {
             UserUseCase service = CreateService();
